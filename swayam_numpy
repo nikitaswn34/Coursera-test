@@ -1,0 +1,59 @@
+import numpy
+mat = numpy.array([[1,2,3],[4,5,6],[7,8,9]])
+
+def add(mat):
+    sum = 0
+    for i in range(2):
+        for j in range(2):
+            if i==j:
+                sum = sum + mat[i][j]
+    return sum
+
+print (add(mat))
+
+
+with open('file.txt', 'w') as f:
+    #print (f.read())
+    f.write('Hey');
+f.close()
+
+
+import random
+import string
+
+def create_encryption_key(string1):
+    chars=list(set(list(string1)))
+    keydict={}
+    taken =[]
+    for each in chars:
+        while(1):
+            r = random.choice(chars)
+            if (r not in taken):
+                keydict[each] = r
+                taken.append(r)
+                break
+    return keydict
+
+def reverse(d):
+    d1={}
+    for each in d:
+        d1[d[each]] = each
+    return d1
+
+def encrypt(letter, key):
+    l=[]
+    for i in range(0, len(letter)):
+        l.append(key[letter[i]])
+    return l
+
+plain_text=input("Enter the string you want to encrypt")
+key=create_encryption_key(plain_text)
+cipher_list= encrypt(plain_text,key)
+cipher_text=(' '.join(cipher_list))
+print (cipher_text)
+plain_list= encrypt(cipher_list,reverse(key))
+#plain_list= encrypt(cipher_list,key)
+plain_text= (' '.join(plain_list))
+print (plain_text)
+
+
